@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:PizzaWorld.MVVM.ViewModels"
+             xmlns:models="clr-namespace:PizzaWorld.MVVM.Models"
+             x:Class="PizzaWorld.Pages.CheckoutPage"
+             Title="CheckoutPage">
+
+
+    <VerticalStackLayout VerticalOptions="Center"
+                         Spacing="25"
+                         HorizontalOptions="Center">
+
+        <Image Source="check.png"
+               x:Name="img"
+               Scale="0"
+               WidthRequest="150"
+               HeightRequest="150">
+            <Image.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="Green"/>
+            </Image.Behaviors>
+        </Image>
+        <Label Text="Order placed Succesfully"
+               x:Name="msg"
+               Scale="0"
+               FontSize="30"
+               TextColor="Green"/>
+        <Button Text="Go to home screen"
+                x:Name="homeBtn"
+                BackgroundColor="DarkGreen"
+                CornerRadius="22"
+                Scale="0"
+                Opacity="0"
+                HorizontalOptions="Center"
+                Clicked="homeBtn_Clicked"
+                Padding="50, 15"/>
+    </VerticalStackLayout>
+
+</ContentPage>

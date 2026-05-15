@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:PizzaWorld.MVVM.ViewModels"
+             xmlns:models="clr-namespace:PizzaWorld.MVVM.Models"
+             x:Class="PizzaWorld.Pages.DetailsPage"
+             Title=""
+             Shell.NavBarIsVisible="False"
+             x:DataType="vm:DetailsViewModel">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior
+            StatusBarStyle="LightContent"/>
+    </ContentPage.Behaviors>
+    <Grid>
+        <ScrollView Padding="15">
+            <VerticalStackLayout Spacing="15">
+                <Image Source="{Binding Pizza.Image}"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                <Label Text="{Binding Pizza.Name}"
+                       FontAttributes="Bold"
+                       FontSize="30"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+                <Grid ColumnDefinitions="*, *">
+                    <Label Text="{Binding Pizza.Price, StringFormat='${0:N2}'}"
+                           FontAttributes="Bold"
+                           FontSize="25"/>
+                    <HorizontalStackLayout Grid.Column="1"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"
+                                           Spacing="2">
+                        <Label Text="4"/>
+                        <Image Source="star.png"
+                               HeightRequest="15"
+                               WidthRequest="15">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="DarkGreen"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </HorizontalStackLayout>
+                </Grid>
+                <Label Text="Description"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       Margin="0, 10"/>
+                <Label FontSize="20"
+                       LineHeight="1.5"
+                       Text="{Binding Pizza.Description}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border StrokeShape="RoundRectangle 30, 30, 0, 0"
+                StrokeThickness="0"
+                x:Name="bottomBox"
+                BackgroundColor="DarkGreen"
+                Margin="-1"
+                VerticalOptions="End"
+                HeightRequest="150"
+                Padding="15">
+            <Border.Shadow>
+                <Shadow Brush="#FF059110"
+                        Radius="50"/>
+            </Border.Shadow>
+
+            <Grid RowDefinitions="Auto, Auto"
+                  ColumnDefinitions="*, *">
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="{Binding Pizza.Amount,StringFormat='${0:N2}'}"
+                       TextColor="White"
+                       FontSize="30"/>
+                <Grid Grid.Row="0"
+                      Grid.Column="1"
+                      ColumnDefinitions="50, 40, 50"
+                      HorizontalOptions="End"
+                      VerticalOptions="Center">
+                    <ImageButton Grid.Column="0"
+                                 Source="minus.png"
+                                 Command="{Binding RemoveFromCartCommand}"
+                                 HeightRequest="40"
+                                 WidthRequest="40"
+                                 VerticalOptions="Center"
+                                 Padding="0">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="Olive"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                    <Label Grid.Column="1"
+                           Text="{Binding Pizza.CartQuantity}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           FontSize="25"
+                           TextColor="White"/>
+                    <ImageButton Grid.Column="2"
+                                 Source="add.png"
+                                 Command="{Binding AddToCartCommand}"
+                                 HeightRequest="40"
+                                 WidthRequest="40"
+                                 VerticalOptions="Center"
+                                 Padding="0">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="Olive"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                </Grid>
+                <Button Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Text="View Cart"
+                        Command="{Binding ViewCartCommand}"
+                        BackgroundColor="OliveDrab"
+                        HorizontalOptions="Center"
+                        CornerRadius="22"
+                        Padding="80, 10"
+                        VerticalOptions="End"
+                        Margin="0, 20"/>
+            </Grid>
+        </Border>
+        <ImageButton Source="{OnPlatform Android='next.png',Default='back_button'}"
+                     VerticalOptions="Start"
+                     HorizontalOptions="Start"
+                     Margin="15"
+                     Rotation="{OnPlatform Android=180,Default=0}"
+                     Clicked="ImageButton_Clicked"
+                     HeightRequest="20"
+                     WidthRequest="20">
+            <ImageButton.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="DarkGreen"/>
+            </ImageButton.Behaviors>
+
+        </ImageButton>
+    </Grid>
+</ContentPage>
